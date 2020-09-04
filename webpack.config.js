@@ -6,6 +6,7 @@ module.exports = (env) => {
   const isDevelopment = env.mode === "development";
 
   return {
+    mode: env.mode,
     resolve: {
       extensions: [".ts", ".js", ".vue"],
     },
