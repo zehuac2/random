@@ -53,7 +53,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "../Button.vue";
-import { RandomSectionModel } from "./model";
+import { RandomSectionModel } from "../../services";
 
 @Component({
   components: {

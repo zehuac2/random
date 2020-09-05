@@ -19,23 +19,27 @@
     <div class="container page">
       <div class="row">
         <div class="col-6">
-          <div>Results Goes Here</div>
-          <Button class="action" block>Generate</Button>
-          <Button class="action" variant="secondary" block @click="onAddSection"
+          <div>{{ output }}</div>
+          <Button class="action" block @click="generate()">Generate</Button>
+          <Button
+            class="action"
+            variant="secondary"
+            block
+            @click="onAddSection()"
             >Add Section</Button
           >
         </div>
         <div class="col-6 sections">
-          <div v-if="sections.length !== 0">
+          <div v-if="configuration.sections.length !== 0">
             <RandomSection
-              v-for="(section, index) in sections"
+              v-for="(section, index) in configuration.sections"
               :key="section.id"
               :value="section"
               @delete="onDelete(index)"
               @input="onInput(index, ...arguments)"
             ></RandomSection>
           </div>
-          <div v-if="sections.length === 0">Empty</div>
+          <div v-else-if="configuration.sections.length === 0">Empty</div>
         </div>
       </div>
     </div>
@@ -46,7 +50,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "./components/Button.vue";
-import RandomSection, { RandomSectionModel } from "./components/RandomSection";
+import RandomSection from "./components/RandomSection";
+import { RandomSectionModel, RandomConfiguration } from "./services";
 
 @Component({
   components: {
@@ -55,20 +60,29 @@ import RandomSection, { RandomSectionModel } from "./components/RandomSection";
   },
 })
 class App extends Vue {
-  private sections: RandomSectionModel[] = [];
+  configuration: RandomConfiguration = new RandomConfiguration();
+  output = "Random String";
 
-  onAddSection() {
-    this.sections.push(new RandomSectionModel(Date.now()));
+  onAddSection(): void {
+    this.configuration.sections.push(new RandomSectionModel(Date.now()));
   }
 
-  onDelete(deleteIndex: number) {
-    this.sections = this.sections.filter(
+  onDelete(deleteIndex: number): void {
+    this.configuration.sections = this.configuration.sections.filter(
       (section, index) => index !== deleteIndex
     );
   }
 
-  onInput(inputIndex: number, value: RandomSectionModel) {
-    this.sections[inputIndex] = value;
+  onInput(inputIndex: number, value: RandomSectionModel): void {
+    this.configuration.sections[inputIndex] = value;
+  }
+
+  generate(): void {
+    if (this.configuration.sections.length === 0) {
+      return;
+    }
+
+    this.output = this.configuration.toString();
   }
 }
 
