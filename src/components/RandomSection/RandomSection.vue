@@ -1,29 +1,47 @@
-<style scoped>
-.head {
-  margin-top: 16px;
+<style lang="scss" scoped>
+$std-padding: 8px;
+
+@mixin row-base {
+  padding: $std-padding;
+}
+
+.row {
+  @include row-base();
+}
+
+.first-row {
+  @include row-base();
+  padding-top: 16px;
+}
+
+.row-button {
+  width: 100%;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 500;
 }
 </style>
 
 <template>
-  <form class="card container">
-    <div class="form-group head">
-      <input
-        class="form-control"
-        placeholder="Name"
+  <form class="mdc-card mdc-card--outlined card">
+    <div class="first-row">
+      <TextField
+        class="row-button"
+        label="Name"
         :value="value.name"
-        @input="onNameChange"
-      />
+      ></TextField>
     </div>
-    <div class="form-group">
-      <input
-        class="form-control"
-        placeholder="Length"
-        :value="value.length"
-        @input="onLengthChange"
-      />
+    <div class="row">
+      <TextField
+        class="row-button"
+        label="Length"
+        :value="value.length.toString()"
+      ></TextField>
     </div>
-    <div class="form-group">
-      <label>Choices</label>
+    <div class="row">
+      <span class="title">Choices</span>
       <div class="form-check">
         <div>
           <input
@@ -44,7 +62,15 @@
           <label>Letters</label>
         </div>
       </div>
-      <Button block variant="danger" @click="onDelete">Delete</Button>
+    </div>
+    <div class="mdc-card__actions">
+      <Button
+        class="mdc-card__action mdc-card__action-button"
+        block
+        variant="outlined"
+        @click="onDelete"
+        >Delete</Button
+      >
     </div>
   </form>
 </template>
@@ -53,11 +79,13 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "../Button.vue";
+import TextField from "../TextField.vue";
 import { RandomSectionModel } from "../../services";
 
 @Component({
   components: {
     Button,
+    TextField,
   },
   props: {
     value: {

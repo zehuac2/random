@@ -1,6 +1,10 @@
+<style lang="sass" scoped></style>
+
 <template>
   <button :class="className" v-on:click="onClick">
-    <slot></slot>
+    <span class="mdc-button__label">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
@@ -19,17 +23,17 @@ import Component from "vue-class-component";
     variant: {
       type: String,
       default() {
-        return "primary";
+        return "raised";
       },
     },
   },
 })
 class Button extends Vue {
   get className(): string {
-    let classes: string[] = ["btn"];
+    let classes: string[] = ["mdc-button"];
 
-    if (this.$props.block) {
-      classes.push("btn-block");
+    if (this.$props.variant) {
+      classes.push(`mdc-button--${this.$props.variant}`);
     }
 
     classes.push(`btn-${this.$props.variant}`);

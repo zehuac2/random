@@ -21,11 +21,7 @@
         <div class="col-6">
           <div>{{ output }}</div>
           <Button class="action" block @click="generate()">Generate</Button>
-          <Button
-            class="action"
-            variant="secondary"
-            block
-            @click="onAddSection()"
+          <Button class="action" block @click="onAddSection()"
             >Add Section</Button
           >
         </div>
