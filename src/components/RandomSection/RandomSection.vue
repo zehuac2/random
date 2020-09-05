@@ -1,11 +1,23 @@
 <template>
-  <div>
-    <div>
-      <span>Name</span>
-      <input v-model="value.name" @input="onNameChange" />
+  <form class="card container">
+    <div class="form-group">
+      <label>Name</label>
+      <input class="form-control" v-model="value.name" @input="onNameChange" />
     </div>
-    <span>{{ value.name.length }}</span>
-  </div>
+    <div class="form-group">
+      <label>Choices</label>
+      <div class="form-check">
+        <div>
+          <input class="form-check-input" type="checkbox">
+          <label>Numbers</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox">
+          <label>Letters</label>
+        </div>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script lang="ts">
@@ -16,11 +28,15 @@ export default Vue.extend({
   props: {
     value: {
       type: Object,
-      required: false
+      default: {
+        name: "Random Section"
+      }
     }
   },
   methods: {
     onNameChange(event: InputEvent) {
+      event.stopPropagation();
+
       this.$emit("input", {
         name: (event.target as HTMLInputElement).value
       })

@@ -2,8 +2,9 @@
 </style>
 
 <template>
-  <div>
+  <div class="container">
     <RandomSection v-model="section"></RandomSection>
+    <h1>{{ section.name.length }}</h1>
   </div>
 </template>
 
@@ -25,9 +26,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    click() {
-      console.log("Asshole")
-    }
   }
 });
 </script>
