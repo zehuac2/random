@@ -8,11 +8,11 @@
       <label>Choices</label>
       <div class="form-check">
         <div>
-          <input class="form-check-input" type="checkbox">
+          <input class="form-check-input" type="checkbox" />
           <label>Numbers</label>
         </div>
         <div>
-          <input class="form-check-input" type="checkbox">
+          <input class="form-check-input" type="checkbox" />
           <label>Letters</label>
         </div>
       </div>
@@ -29,18 +29,18 @@ export default Vue.extend({
     value: {
       type: Object,
       default: {
-        name: "Random Section"
-      }
-    }
+        name: "Random Section",
+      },
+    },
   },
   methods: {
     onNameChange(event: InputEvent) {
       event.stopPropagation();
 
       this.$emit("input", {
-        name: (event.target as HTMLInputElement).value
-      })
-    }
-  }
+        name: (event.target as HTMLInputElement).value,
+      });
+    },
+  },
 });
 </script>

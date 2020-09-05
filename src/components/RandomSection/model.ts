@@ -1,6 +1,6 @@
 export enum RandomChoice {
   NUMBERS = 1,
-  CHARS = 2
+  CHARS = 2,
 }
 
 export interface RandomSection {
