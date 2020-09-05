@@ -1,16 +1,21 @@
 <style lang="sass" scoped></style>
 
 <template>
-  <button :class="className" v-on:click="onClick">
-    <span class="mdc-button__label">
-      <slot></slot>
-    </span>
-  </button>
+  <div class="mdc-touch-target-wrapper">
+    <button ref="container" :class="className" @click="onClick">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">
+        <slot></slot>
+      </span>
+      <div class="mdc-button__touch"></div>
+    </button>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { MDCRipple } from "@material/ripple";
 
 @Component({
   props: {
@@ -41,7 +46,11 @@ class Button extends Vue {
     return classes.join(" ");
   }
 
-  onClick(event: MouseEvent) {
+  mounted(): void {
+    new MDCRipple(this.$refs.container as Element);
+  }
+
+  onClick(event: MouseEvent): void {
     this.$emit("click", event);
   }
 }
