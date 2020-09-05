@@ -46,10 +46,10 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Component from "vue-class-component";
 import Button from "../Button.vue";
-import { RandomSection } from "./model";
 
-export default Vue.extend({
+@Component({
   components: {
     Button,
   },
@@ -63,30 +63,37 @@ export default Vue.extend({
       },
     },
   },
-  methods: {
-    onNameChange(event: InputEvent) {
-      event.preventDefault();
+})
+class RandomSection extends Vue {
+  onNameChange(event: InputEvent) {
+    event.preventDefault();
 
-      let value = { ...this.$props.value };
-      value.name = (event.target as HTMLInputElement).value;
+    let value = { ...this.$props.value };
+    value.name = (event.target as HTMLInputElement).value;
 
-      this.$emit("input", name);
-    },
-    toggleUseNumbers() {
-      let value = { ...this.$props.value };
-      value.useNumbers = !value.useNumbers;
+    this.$emit("input", name);
+  }
 
-      this.$emit("input", value);
-    },
-    toggleUseLetters() {
-      let value = { ...this.$props.value };
-      value.useLetters = !value.useLetters;
+  toggleUseNumbers() {
+    let value = { ...this.$props.value };
+    value.useNumbers = !value.useNumbers;
 
-      this.$emit("input", value);
-    },
-    onDelete(event: MouseEvent) {
-      event.preventDefault();
-    },
-  },
-});
+    this.$emit("input", value);
+  }
+
+  toggleUseLetters() {
+    let value = { ...this.$props.value };
+    value.useLetters = !value.useLetters;
+
+    this.$emit("input", value);
+  }
+
+  onDelete(event: MouseEvent) {
+    event.preventDefault();
+
+    this.$emit("delete", event);
+  }
+}
+
+export default RandomSection;
 </script>
