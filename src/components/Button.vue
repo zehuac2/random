@@ -15,6 +15,12 @@ export default Vue.extend({
         return false;
       },
     },
+    variant: {
+      type: String,
+      default() {
+        return "primary";
+      },
+    },
   },
   methods: {
     onClick(event: MouseEvent) {
@@ -28,6 +34,8 @@ export default Vue.extend({
       if (this.$props.block) {
         classes.push("btn-block");
       }
+
+      classes.push(`btn-${this.$props.variant}`);
 
       return classes.join(" ");
     },

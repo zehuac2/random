@@ -9,7 +9,7 @@
   overflow-y: auto;
 }
 
-.confirm-button {
+.action {
   margin-top: 8px;
 }
 </style>
@@ -20,7 +20,8 @@
       <div class="row">
         <div class="col-6">
           <div>Results Goes Here</div>
-          <Button class="confirm-button" block>Generate</Button>
+          <Button class="action" block>Generate</Button>
+          <Button class="action" variant="secondary" block>Add Section</Button>
         </div>
         <div class="col-6 sections">
           <RandomSection
@@ -47,7 +48,7 @@ export default Vue.extend({
   data() {
     return {
       sections: [
-        { name: "Section 1" },
+        { name: "Section 1", useNumbers: true },
         { name: "Section 2" },
         { name: "Section 3" },
         { name: "Section 4" },
