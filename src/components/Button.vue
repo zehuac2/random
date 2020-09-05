@@ -6,8 +6,9 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Component from "vue-class-component";
 
-export default Vue.extend({
+@Component({
   props: {
     block: {
       type: Boolean,
@@ -22,23 +23,24 @@ export default Vue.extend({
       },
     },
   },
-  methods: {
-    onClick(event: MouseEvent) {
-      this.$emit("click", event);
-    },
-  },
-  computed: {
-    className() {
-      let classes: string[] = ["btn", "btn-primary"];
+})
+class Button extends Vue {
+  get className(): string {
+    let classes: string[] = ["btn"];
 
-      if (this.$props.block) {
-        classes.push("btn-block");
-      }
+    if (this.$props.block) {
+      classes.push("btn-block");
+    }
 
-      classes.push(`btn-${this.$props.variant}`);
+    classes.push(`btn-${this.$props.variant}`);
 
-      return classes.join(" ");
-    },
-  },
-});
+    return classes.join(" ");
+  }
+
+  onClick(event: MouseEvent) {
+    this.$emit("click", event);
+  }
+}
+
+export default Button;
 </script>
