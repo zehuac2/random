@@ -15,7 +15,7 @@
 </style>
 
 <template>
-  <div class="bg-light">
+  <div>
     <div class="container page">
       <div class="row">
         <div class="col-6">

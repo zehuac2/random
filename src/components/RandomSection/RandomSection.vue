@@ -1,21 +1,21 @@
 <style lang="scss" scoped>
 $std-padding: 8px;
 
-@mixin row-base {
+@mixin card-row-base {
   padding: $std-padding;
 }
 
-.row {
-  @include row-base();
+.card-row {
+  @include card-row-base();
 }
 
-.first-row {
-  @include row-base();
-  padding-top: 16px;
-}
-
-.row-button {
+.card-row-textfield {
   width: 100%;
+}
+
+.card-first-row {
+  @include card-row-base();
+  padding-top: 16px;
 }
 
 .title {
@@ -26,21 +26,21 @@ $std-padding: 8px;
 
 <template>
   <form class="mdc-card mdc-card--outlined card">
-    <div class="first-row">
+    <div class="card-first-row">
       <TextField
-        class="row-button"
+        class="card-row-textfield"
         label="Name"
         :value="value.name"
       ></TextField>
     </div>
-    <div class="row">
+    <div class="card-row">
       <TextField
-        class="row-button"
+        class="card-row-textfield"
         label="Length"
         :value="value.length.toString()"
       ></TextField>
     </div>
-    <div class="row">
+    <div class="card-row">
       <span class="title">Choices</span>
       <div class="form-check">
         <div>
