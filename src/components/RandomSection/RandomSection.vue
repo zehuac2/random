@@ -10,12 +10,17 @@
       <input
         class="form-control"
         placeholder="Name"
-        v-model="value.name"
+        :value="value.name"
         @input="onNameChange"
       />
     </div>
     <div class="form-group">
-      <input class="form-control" placeholder="Length" />
+      <input
+        class="form-control"
+        placeholder="Length"
+        :value="value.length"
+        @input="onLengthChange"
+      />
     </div>
     <div class="form-group">
       <label>Choices</label>
@@ -48,6 +53,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "../Button.vue";
+import { RandomSectionModel } from "./model";
 
 @Component({
   components: {
@@ -55,11 +61,9 @@ import Button from "../Button.vue";
   },
   props: {
     value: {
-      type: Object,
-      default: {
-        name: "Random Section",
-        useNumbers: false,
-        useLetters: false,
+      type: RandomSectionModel,
+      default() {
+        return new RandomSectionModel(0);
       },
     },
   },
@@ -68,21 +72,28 @@ class RandomSection extends Vue {
   onNameChange(event: InputEvent) {
     event.preventDefault();
 
-    let value = { ...this.$props.value };
+    let value = this.$props.value as RandomSectionModel;
     value.name = (event.target as HTMLInputElement).value;
 
-    this.$emit("input", name);
+    this.$emit("input", value);
+  }
+
+  onLengthChange(event: InputEvent) {
+    let value = this.$props.value as RandomSectionModel;
+    value.length = Number.parseInt((event.target as HTMLInputElement).value);
+
+    this.$emit("input", value);
   }
 
   toggleUseNumbers() {
-    let value = { ...this.$props.value };
+    let value = this.$props.value as RandomSectionModel;
     value.useNumbers = !value.useNumbers;
 
     this.$emit("input", value);
   }
 
   toggleUseLetters() {
-    let value = { ...this.$props.value };
+    let value = this.$props.value as RandomSectionModel;
     value.useLetters = !value.useLetters;
 
     this.$emit("input", value);

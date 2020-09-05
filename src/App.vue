@@ -29,9 +29,10 @@
           <div v-if="sections.length !== 0">
             <RandomSection
               v-for="(section, index) in sections"
-              :key="index"
+              :key="section.id"
               :value="section"
               @delete="onDelete(index)"
+              @input="onInput(index, ...arguments)"
             ></RandomSection>
           </div>
           <div v-if="sections.length === 0">Empty</div>
@@ -45,7 +46,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "./components/Button.vue";
-import RandomSection from "./components/RandomSection";
+import RandomSection, { RandomSectionModel } from "./components/RandomSection";
 
 @Component({
   components: {
@@ -54,24 +55,20 @@ import RandomSection from "./components/RandomSection";
   },
 })
 class App extends Vue {
-  private sections: any[] = [
-    { name: "Section 1", useNumbers: true },
-    { name: "Section 2" },
-    { name: "Section 3" },
-    { name: "Section 4" },
-    { name: "Section 5" },
-  ];
+  private sections: RandomSectionModel[] = [];
 
   onAddSection() {
-    this.sections.push({
-      name: "New Section",
-    });
+    this.sections.push(new RandomSectionModel(Date.now()));
   }
 
   onDelete(deleteIndex: number) {
     this.sections = this.sections.filter(
       (section, index) => index !== deleteIndex
     );
+  }
+
+  onInput(inputIndex: number, value: RandomSectionModel) {
+    this.sections[inputIndex] = value;
   }
 }
 
