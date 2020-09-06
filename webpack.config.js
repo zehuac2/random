@@ -1,11 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
   const isDevelopment = env.mode === "development";
 
-  return {
+  let config = {
     mode: env.mode,
     resolve: {
       extensions: [".ts", ".js", ".vue"],
@@ -21,7 +22,7 @@ module.exports = (env) => {
         {
           test: /\.s(a|c)ss$/,
           use: [
-            "style-loader",
+            isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
             "css-loader",
             "sass-loader"
           ]
@@ -29,6 +30,7 @@ module.exports = (env) => {
         {
           test: /\.css$/,
           use: [
+            isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
             "style-loader",
             "css-loader"
           ]
@@ -62,4 +64,10 @@ module.exports = (env) => {
       port: 4000,
     },
   };
+
+  if (!isDevelopment) {
+    config.plugins.push(new MiniCssExtractPlugin());
+  }
+
+  return config;
 };
