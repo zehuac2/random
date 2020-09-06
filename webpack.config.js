@@ -54,7 +54,8 @@ module.exports = (env) => {
       index: path.resolve(__dirname, "src", "index.ts"),
     },
     output: {
-      filename: "[name].[contenthash].js"
+      filename: "[name].[contenthash].js",
+      publicPath: isDevelopment ? "/" : "https://zehua-chen.github.io/random/"
     },
     plugins: [
       new CleanWebpackPlugin(),
