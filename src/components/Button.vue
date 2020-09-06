@@ -69,7 +69,7 @@ class Button extends Vue {
   }
 
   mounted(): void {
-    new MDCRipple(this.$refs.container as Element);
+    let ripple = new MDCRipple(this.$refs.container as Element);
   }
 
   onClick(event: MouseEvent): void {

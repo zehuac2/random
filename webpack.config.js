@@ -58,17 +58,19 @@ module.exports = (env) => {
       publicPath: isDevelopment ? "/" : "https://zehua-chen.github.io/random/"
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
         filename: "index.html",
         template: path.join("public", "index.html"),
         chunks: ["index"],
       }),
+      new CleanWebpackPlugin(),
     ],
     devServer: {
+      host: "0.0.0.0",
       port: 4000,
     },
+    devtool: "source-map",
     optimization: {
       runtimeChunk: "single",
       splitChunks: {

@@ -30,14 +30,15 @@ $std-padding: 8px;
       <TextField
         class="card-row-textfield"
         label="Name"
-        :value="value.name"
+        v-model="value.name"
       ></TextField>
     </div>
     <div class="card-row">
       <TextField
         class="card-row-textfield"
         label="Length"
-        :value="value.length.toString()"
+        v-model.number="value.length"
+        type="number"
       ></TextField>
     </div>
     <div class="card-row">
@@ -47,8 +48,7 @@ $std-padding: 8px;
           <input
             class="form-check-input"
             type="checkbox"
-            :checked="value.useNumbers"
-            @click="toggleUseNumbers"
+            v-model="value.useNumbers"
           />
           <label>Numbers</label>
         </div>
@@ -56,8 +56,7 @@ $std-padding: 8px;
           <input
             class="form-check-input"
             type="checkbox"
-            :checked="value.useLetters"
-            @click="toggleUseLetters"
+            v-model="value.useLetters"
           />
           <label>Letters</label>
         </div>
@@ -97,36 +96,6 @@ import { RandomSectionModel } from "../../services";
   },
 })
 class RandomSection extends Vue {
-  onNameChange(event: InputEvent) {
-    event.preventDefault();
-
-    let value = this.$props.value as RandomSectionModel;
-    value.name = (event.target as HTMLInputElement).value;
-
-    this.$emit("input", value);
-  }
-
-  onLengthChange(event: InputEvent) {
-    let value = this.$props.value as RandomSectionModel;
-    value.length = Number.parseInt((event.target as HTMLInputElement).value);
-
-    this.$emit("input", value);
-  }
-
-  toggleUseNumbers() {
-    let value = this.$props.value as RandomSectionModel;
-    value.useNumbers = !value.useNumbers;
-
-    this.$emit("input", value);
-  }
-
-  toggleUseLetters() {
-    let value = this.$props.value as RandomSectionModel;
-    value.useLetters = !value.useLetters;
-
-    this.$emit("input", value);
-  }
-
   onDelete(event: MouseEvent) {
     event.preventDefault();
 

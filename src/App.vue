@@ -55,7 +55,6 @@
               :key="section.id"
               :value="section"
               @delete="onDelete(index)"
-              @input="onInput(index, ...arguments)"
             ></RandomSection>
           </div>
           <!--Empty-->
@@ -98,10 +97,6 @@ class App extends Vue {
     this.configuration.sections = this.configuration.sections.filter(
       (section, index) => index !== deleteIndex
     );
-  }
-
-  onInput(inputIndex: number, value: RandomSectionModel): void {
-    this.configuration.sections[inputIndex] = value;
   }
 
   generate(): void {
