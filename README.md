@@ -17,3 +17,4 @@ Vue learner project
 
 1. `yarn install`
 2. `yarn build`
+3. `node publish.js`
