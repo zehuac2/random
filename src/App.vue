@@ -1,25 +1,54 @@
 <style lang="scss" scoped>
-.page {
+.app {
   height: 100vh;
   padding: 24px;
 }
 
+.about {
+  margin-top: 50px;
+}
+
 .sections {
-  height: 100%;
-  overflow-y: auto;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.main-action {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 </style>
 
 <template>
-  <div>
-    <div class="container page">
+  <div class="app">
+    <div class="container">
       <div class="row">
         <div class="col-6">
-          <div>{{ output }}</div>
-          <Button @click="generate()">Generate</Button>
-          <Button color="secondary" @click="onAddSection()">Add Section</Button>
+          <!--Output-->
+          <Typography variant="headline6">{{ output }}</Typography>
+          <!--Actions-->
+          <div class="main-action">
+            <Button block @click="generate()">Generate</Button>
+          </div>
+          <div class="main-action">
+            <Button block color="secondary" @click="onAddSection()"
+              >Add Section</Button
+            >
+          </div>
+          <!--About Info-->
+          <div class="about">
+            <div>
+              <Typography variant="subtitle1"
+                >Random String Generator</Typography
+              >
+            </div>
+            <div>
+              <Typography variant="subtitle2">Zehua Chen © 2020</Typography>
+            </div>
+          </div>
         </div>
         <div class="col-6 sections">
+          <!--Sections-->
           <div v-if="configuration.sections.length !== 0">
             <RandomSection
               v-for="(section, index) in configuration.sections"
@@ -29,7 +58,13 @@
               @input="onInput(index, ...arguments)"
             ></RandomSection>
           </div>
-          <div v-else-if="configuration.sections.length === 0">Empty</div>
+          <!--Empty-->
+          <Typography
+            variant="headline6"
+            v-else-if="configuration.sections.length === 0"
+          >
+            Empty
+          </Typography>
         </div>
       </div>
     </div>
@@ -40,6 +75,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "./components/Button.vue";
+import Typography from "./components/Typography.vue";
 import RandomSection from "./components/RandomSection";
 import { RandomSectionModel, RandomConfiguration } from "./services";
 
@@ -47,6 +83,7 @@ import { RandomSectionModel, RandomConfiguration } from "./services";
   components: {
     Button,
     RandomSection,
+    Typography,
   },
 })
 class App extends Vue {

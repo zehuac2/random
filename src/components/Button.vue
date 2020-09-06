@@ -5,6 +5,10 @@
 .raised-secondary {
   @include button.filled-accessible(colors.$secondary);
 }
+
+.block {
+  width: 100%;
+}
 </style>
 
 <template>
@@ -28,21 +32,27 @@ import { MDCRipple } from "@material/ripple";
   props: {
     color: {
       type: String,
-      default() {
+      default(): string {
         return "primary";
       },
     },
     variant: {
       type: String,
-      default() {
+      default(): string {
         return "raised";
+      },
+    },
+    block: {
+      type: Boolean,
+      default(): boolean {
+        return false;
       },
     },
   },
 })
 class Button extends Vue {
   get className(): string {
-    const { color, variant } = this.$props;
+    const { color, variant, block } = this.$props;
     let classes: string[] = ["mdc-button"];
 
     if (variant) {
@@ -50,6 +60,10 @@ class Button extends Vue {
     }
 
     classes.push(`${variant}-${color}`);
+
+    if (block) {
+      classes.push("block");
+    }
 
     return classes.join(" ");
   }

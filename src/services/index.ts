@@ -53,6 +53,10 @@ export class RandomSectionModel {
 export class RandomConfiguration {
   sections: RandomSectionModel[] = [];
 
+  constructor() {
+    this.sections.push(new RandomSectionModel(Date.now()));
+  }
+
   toString(): string {
     return this.sections.map((section) => section.toString()).join("-");
   }

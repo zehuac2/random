@@ -11,8 +11,10 @@
 @use "@material/card/mdc-card";
 @use "@material/button/mdc-button";
 @use "@material/textfield/mdc-text-field";
+@use "@material/typography/mdc-typography";
 
 body {
   background: theme.$background;
   font-family: "Roboto", --apple-system, "Segoe UI";
+  overflow: hidden;
 }
