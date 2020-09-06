@@ -1,0 +1,18 @@
+@use "./colors";
+
+@use "@material/theme" with (
+  $primary: colors.$primary,
+  $secondary: colors.$secondary,
+  $on-primary: colors.$on-primary,
+  $on-secondary: colors.$on-secondary,
+);
+
+@use "bootstrap/scss/bootstrap-grid";
+@use "@material/card/mdc-card";
+@use "@material/button/mdc-button";
+@use "@material/textfield/mdc-text-field";
+
+body {
+  background: theme.$background;
+  font-family: "Roboto", --apple-system, "Segoe UI";
+}

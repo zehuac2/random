@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
 .page {
   height: 100vh;
   padding: 24px;
@@ -8,10 +8,6 @@
   height: 100%;
   overflow-y: auto;
 }
-
-.action {
-  margin-top: 8px;
-}
 </style>
 
 <template>
@@ -20,10 +16,8 @@
       <div class="row">
         <div class="col-6">
           <div>{{ output }}</div>
-          <Button class="action" block @click="generate()">Generate</Button>
-          <Button class="action" block @click="onAddSection()"
-            >Add Section</Button
-          >
+          <Button @click="generate()">Generate</Button>
+          <Button color="secondary" @click="onAddSection()">Add Section</Button>
         </div>
         <div class="col-6 sections">
           <div v-if="configuration.sections.length !== 0">

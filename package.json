@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.mode='development' --config webpack.config.js",
-    "format": "prettier --write 'src/**/*.{js,ts,vue}'",
+    "format": "prettier --write 'src/**/*.{js,ts,vue,scss}'",
     "build": "webpack --env.mode='production' --config webpack.config.js"
   },
   "devDependencies": {

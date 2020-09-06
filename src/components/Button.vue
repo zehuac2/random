@@ -1,4 +1,11 @@
-<style lang="sass" scoped></style>
+<style lang="scss" scoped>
+@use "../styles/colors";
+@use "@material/button";
+
+.raised-secondary {
+  @include button.filled-accessible(colors.$secondary);
+}
+</style>
 
 <template>
   <div class="mdc-touch-target-wrapper">
@@ -19,10 +26,10 @@ import { MDCRipple } from "@material/ripple";
 
 @Component({
   props: {
-    block: {
-      type: Boolean,
+    color: {
+      type: String,
       default() {
-        return false;
+        return "primary";
       },
     },
     variant: {
@@ -35,13 +42,14 @@ import { MDCRipple } from "@material/ripple";
 })
 class Button extends Vue {
   get className(): string {
+    const { color, variant } = this.$props;
     let classes: string[] = ["mdc-button"];
 
-    if (this.$props.variant) {
-      classes.push(`mdc-button--${this.$props.variant}`);
+    if (variant) {
+      classes.push(`mdc-button--${variant}`);
     }
 
-    classes.push(`btn-${this.$props.variant}`);
+    classes.push(`${variant}-${color}`);
 
     return classes.join(" ");
   }
