@@ -4,8 +4,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  // padding: 24px;
+  height: 100%;
 }
 
 .main {
@@ -28,7 +27,7 @@
 
 .bottombar-section {
   margin-top: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 </style>
 
