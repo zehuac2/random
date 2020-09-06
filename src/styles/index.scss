@@ -5,6 +5,7 @@
   $secondary: colors.$secondary,
   $on-primary: colors.$on-primary,
   $on-secondary: colors.$on-secondary,
+  $surface: colors.$surface,
 );
 
 @use "bootstrap/scss/bootstrap-grid";
@@ -14,7 +15,8 @@
 @use "@material/typography/mdc-typography";
 
 body {
-  background: theme.$background;
   font-family: "Roboto", --apple-system, "Segoe UI";
-  overflow: hidden;
+  padding: 0px;
+  margin: 0px;
+  background: theme.$grey-50;
 }

@@ -1,69 +1,63 @@
 <style lang="scss" scoped>
+@use "./styles/colors";
+
 .app {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  padding: 24px;
+  // padding: 24px;
 }
 
-.about {
-  margin-top: 50px;
+.main {
+  padding-top: 16px;
+  flex-grow: 1;
+  overflow: scroll;
 }
 
-.sections {
-  height: 100vh;
-  overflow-y: scroll;
+.main-bottomspace {
+  height: 10px;
 }
 
-.main-action {
-  margin-top: 8px;
-  margin-bottom: 8px;
+.bottombar {
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-top: 1px solid lightgrey;
+  padding-bottom: 8px;
+  background: colors.$surface;
+}
+
+.bottombar-section {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 </style>
 
 <template>
   <div class="app">
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <!--Output-->
-          <Typography variant="headline6">{{ output }}</Typography>
-          <!--Actions-->
-          <div class="main-action">
-            <Button block @click="generate()">Generate</Button>
+    <div class="main container">
+      <RandomSection
+        v-for="(section, index) in configuration.sections"
+        :key="section.id"
+        :value="section"
+        @delete="onDelete(index, ...arguments)"
+      >
+      </RandomSection>
+      <div class="main-bottomspace"></div>
+    </div>
+    <div class="bottombar">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 bottombar-section">
+            <Typography variant="headline6">{{ output }}</Typography>
           </div>
-          <div class="main-action">
-            <Button block color="secondary" @click="onAddSection()"
-              >Add Section</Button
+          <div class="col-12 bottombar-section">
+            <Button block @click="onGenerate">Generate</Button>
+          </div>
+          <div class="col-12 bottombar-section">
+            <Button color="secondary" block @click="onAddSection"
+              >Add Sections</Button
             >
           </div>
-          <!--About Info-->
-          <div class="about">
-            <div>
-              <Typography variant="subtitle1"
-                >Random String Generator</Typography
-              >
-            </div>
-            <div>
-              <Typography variant="subtitle2">Zehua Chen © 2020</Typography>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 sections">
-          <!--Sections-->
-          <div v-if="configuration.sections.length !== 0">
-            <RandomSection
-              v-for="(section, index) in configuration.sections"
-              :key="section.id"
-              :value="section"
-              @delete="onDelete(index)"
-            ></RandomSection>
-          </div>
-          <!--Empty-->
-          <Typography
-            variant="headline6"
-            v-else-if="configuration.sections.length === 0"
-          >
-            Empty
-          </Typography>
         </div>
       </div>
     </div>
@@ -99,8 +93,9 @@ class App extends Vue {
     );
   }
 
-  generate(): void {
+  onGenerate(): void {
     if (this.configuration.sections.length === 0) {
+      this.output = "Must have at least one section";
       return;
     }
 
