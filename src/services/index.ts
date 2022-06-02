@@ -1,8 +1,8 @@
-const letters: string = "abcdefghijklmnopqrstuvwxyz";
+const letters: string = 'abcdefghijklmnopqrstuvwxyz';
 
 export class RandomSectionModel {
   id: number;
-  name: string = "New Section";
+  name: string = 'New Section';
   length: number = 5;
   useNumbers: boolean = true;
   useLetters: boolean = true;
@@ -38,7 +38,7 @@ export class RandomSectionModel {
     }
 
     if (choices.length === 0) {
-      throw new Error("Cannot create random string from empty choices");
+      throw new Error('Cannot create random string from empty choices');
     }
 
     for (let i = 0; i < this.length; i++) {
@@ -46,7 +46,7 @@ export class RandomSectionModel {
       output.push(choices[index]);
     }
 
-    return output.join("");
+    return output.join('');
   }
 }
 
@@ -58,6 +58,6 @@ export class RandomConfiguration {
   }
 
   toString(): string {
-    return this.sections.map((section) => section.toString()).join("-");
+    return this.sections.map((section) => section.toString()).join('-');
   }
 }

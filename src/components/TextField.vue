@@ -4,7 +4,7 @@
       type="text"
       class="mdc-text-field__input"
       aria-labelledby="my-label-id"
-      :value="value"
+      :value="modelValue"
       @input="onInput"
     />
     <span class="mdc-notched-outline">
@@ -17,36 +17,37 @@
   </label>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { MDCTextField } from "@material/textfield";
+<script setup lang="ts">
+import { defineProps, defineEmits, onMounted, ref } from 'vue';
+import { MDCTextField } from '@material/textfield';
 
-@Component({
-  props: {
-    label: {
-      type: String,
-      default() {
-        return "Label";
-      },
-    },
-    value: {
-      type: String,
-      default() {
-        return "";
-      },
+const props = defineProps({
+  label: {
+    type: String,
+    default() {
+      return 'Label';
     },
   },
-})
-class TextField extends Vue {
-  mounted() {
-    new MDCTextField(this.$refs.container as Element);
-  }
+  modelValue: {
+    type: [String, Number],
+    default() {
+      return '';
+    },
+  },
+});
 
-  onInput(event: InputEvent) {
-    this.$emit("input", (event.target as HTMLInputElement).value);
-  }
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void;
+}>();
+
+const container = ref<HTMLElement | null>(null);
+
+function onInput(event: Event) {
+  const value = (event.target as HTMLInputElement).value;
+  emit('update:modelValue', value);
 }
 
-export default TextField;
+onMounted(() => {
+  new MDCTextField(container.value as Element);
+});
 </script>

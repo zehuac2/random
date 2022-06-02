@@ -74,34 +74,28 @@ $std-padding: 8px;
   </form>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import Button from "../Button.vue";
-import TextField from "../TextField.vue";
-import { RandomSectionModel } from "../../services";
+<script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
+import Button from '../Button.vue';
+import TextField from '../TextField.vue';
+import { RandomSectionModel } from '../../services';
 
-@Component({
-  components: {
-    Button,
-    TextField,
-  },
-  props: {
-    value: {
-      type: RandomSectionModel,
-      default() {
-        return new RandomSectionModel(0);
-      },
+const props = defineProps({
+  value: {
+    type: RandomSectionModel,
+    default() {
+      return new RandomSectionModel(0);
     },
   },
-})
-class RandomSection extends Vue {
-  onDelete(event: MouseEvent) {
-    event.preventDefault();
+});
 
-    this.$emit("delete", event);
-  }
+const emit = defineEmits<{
+  (event: 'delete', e: MouseEvent): void;
+}>();
+
+function onDelete(event: MouseEvent) {
+  event.preventDefault();
+
+  emit('delete', event);
 }
-
-export default RandomSection;
 </script>

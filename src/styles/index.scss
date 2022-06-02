@@ -1,21 +1,21 @@
-@use "./colors";
+@use './colors';
 
-@use "@material/theme" with (
+@use '@material/theme' with (
   $primary: colors.$primary,
   $secondary: colors.$secondary,
   $on-primary: colors.$on-primary,
   $on-secondary: colors.$on-secondary,
-  $surface: colors.$surface,
+  $surface: colors.$surface
 );
 
-@use "bootstrap/scss/bootstrap-grid";
-@use "@material/card/mdc-card";
-@use "@material/button/mdc-button";
-@use "@material/textfield/mdc-text-field";
-@use "@material/typography/mdc-typography";
+@use 'bootstrap/scss/bootstrap-grid';
+@use '@material/card/mdc-card';
+@use '@material/button/mdc-button';
+@use '@material/textfield/mdc-text-field';
+@use '@material/typography/mdc-typography';
 
 body {
-  font-family: "Roboto", --apple-system, "Segoe UI";
+  font-family: 'Roboto', --apple-system, 'Segoe UI';
   padding: 0px;
   margin: 0px;
   background: theme.$grey-50;

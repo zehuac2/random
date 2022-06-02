@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
-@use "../styles/colors";
-@use "@material/button";
+@use '../styles/colors';
+@use '@material/button';
 
 .raised-secondary {
   @include button.filled-accessible(colors.$secondary);
@@ -13,7 +13,7 @@
 
 <template>
   <div class="mdc-touch-target-wrapper">
-    <button ref="container" :class="className" @click="onClick">
+    <button ref="container" :class="className">
       <div class="mdc-button__ripple"></div>
       <span class="mdc-button__label">
         <slot></slot>
@@ -23,59 +23,51 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { MDCRipple } from "@material/ripple";
+<script setup lang="ts">
+import { defineProps, onMounted, ref, computed } from 'vue';
+import { MDCRipple } from '@material/ripple';
 
-@Component({
-  props: {
-    color: {
-      type: String,
-      default(): string {
-        return "primary";
-      },
-    },
-    variant: {
-      type: String,
-      default(): string {
-        return "raised";
-      },
-    },
-    block: {
-      type: Boolean,
-      default(): boolean {
-        return false;
-      },
+const container = ref(null);
+
+const props = defineProps({
+  color: {
+    type: String,
+    default(): string {
+      return 'primary';
     },
   },
-})
-class Button extends Vue {
-  get className(): string {
-    const { color, variant, block } = this.$props;
-    let classes: string[] = ["mdc-button"];
+  variant: {
+    type: String,
+    default(): string {
+      return 'raised';
+    },
+  },
+  block: {
+    type: Boolean,
+    default(): boolean {
+      return false;
+    },
+  },
+});
 
-    if (variant) {
-      classes.push(`mdc-button--${variant}`);
-    }
+const className = computed(() => {
+  const { color, variant, block } = props;
+  let classes: string[] = ['mdc-button'];
 
-    classes.push(`${variant}-${color}`);
-
-    if (block) {
-      classes.push("block");
-    }
-
-    return classes.join(" ");
+  if (variant) {
+    classes.push(`mdc-button--${variant}`);
   }
 
-  mounted(): void {
-    let ripple = new MDCRipple(this.$refs.container as Element);
+  classes.push(`${variant}-${color}`);
+
+  if (block) {
+    classes.push('block');
   }
 
-  onClick(event: MouseEvent): void {
-    this.$emit("click", event);
-  }
-}
+  return classes.join(' ');
+});
 
-export default Button;
+onMounted(() => {
+  new MDCRipple(container.value as unknown as Element);
+});
 </script>

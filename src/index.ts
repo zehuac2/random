@@ -1,10 +1,6 @@
-import Vue from "vue";
-import App from "./App.vue";
-import "./styles/index.scss";
+import { createApp } from 'vue';
+import App from './App.vue';
+import './styles/index.scss';
 
-new Vue({
-  el: "#app",
-  render(h) {
-    return h(App);
-  },
-});
+const app = createApp(App);
+app.mount('#app');

@@ -1,1 +1,1 @@
-export { default } from "./RandomSection.vue";
+export { default } from './RandomSection.vue';

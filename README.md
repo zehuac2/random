@@ -1,20 +1,15 @@
 # Random Generator
 
-Vue learner project
-
-## Highlight
-
-1. Custom Webpack setup
-2. Material Design Components integration
+A web app to generate random strings
 
 ## Development
 
-1. `yarn install`
-2. `yarn start`: website hosted at `localhost:4000` and can be accessed in
+1. `pnpm install`
+2. `pnpm start`: website hosted at `localhost:3000` and can be accessed in
    your local network
 
 ## Publishing
 
-1. `yarn install`
-2. `yarn build`
+1. `pnpm install`
+2. `pnpm build`
 3. `node publish.js`
