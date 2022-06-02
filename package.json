@@ -8,7 +8,7 @@
   "scripts": {
     "start": "vite",
     "format": "prettier --write 'src/**/*.{js,ts,vue,scss}'",
-    "build": "vite build"
+    "build": "vite build --base https://zehua-chen.github.io/random/"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
