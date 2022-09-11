@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { MDCRipple } from '@material/ripple';
 
 const container = ref(null);

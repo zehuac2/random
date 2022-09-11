@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { MDCTextField } from '@material/textfield';
 
 const props = defineProps({

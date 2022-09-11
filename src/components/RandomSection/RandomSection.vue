@@ -75,7 +75,6 @@ $std-padding: 8px;
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
 import Button from '../Button.vue';
 import TextField from '../TextField.vue';
 import { RandomSectionModel } from '../../services';
