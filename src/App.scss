@@ -1,0 +1,66 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.main-bottomspace {
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.bottombar {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--app-border);
+  padding-block: 8px;
+  background: var(--app-surface);
+}
+
+.bottombar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-card {
+  margin: 0;
+}
+
+.section-card-surface {
+  display: block;
+  width: 100%;
+}
+
+.section-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.section-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-choices-title {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.section-choice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}

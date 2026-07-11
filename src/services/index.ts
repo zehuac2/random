@@ -1,29 +1,28 @@
-const letters: string = 'abcdefghijklmnopqrstuvwxyz';
+const letters = 'abcdefghijklmnopqrstuvwxyz';
 
 export class RandomSectionModel {
   id: number;
-  name: string = 'New Section';
-  length: number = 5;
-  useNumbers: boolean = true;
-  useLetters: boolean = true;
+  name = 'New Section';
+  length = 5;
+  useNumbers = true;
+  useLetters = true;
 
   constructor(id: number) {
     this.id = id;
   }
 
   clone(): RandomSectionModel {
-    let copy = new RandomSectionModel(this.id);
+    const copy = new RandomSectionModel(this.id);
     copy.name = this.name;
     copy.length = this.length;
-    this.useNumbers = this.useNumbers;
-    this.useLetters = this.useLetters;
-
+    copy.useNumbers = this.useNumbers;
+    copy.useLetters = this.useLetters;
     return copy;
   }
 
   toString(): string {
-    let choices: string[] = [];
-    let output: string[] = [];
+    const choices: string[] = [];
+    const output: string[] = [];
 
     if (this.useLetters) {
       for (let i = 0; i < letters.length; i++) {
@@ -42,7 +41,7 @@ export class RandomSectionModel {
     }
 
     for (let i = 0; i < this.length; i++) {
-      let index = Math.floor(Math.random() * choices.length);
+      const index = Math.floor(Math.random() * choices.length);
       output.push(choices[index]);
     }
 

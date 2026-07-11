@@ -4,12 +4,14 @@ A web app to generate random strings
 
 ## Development
 
-1. `pnpm install`
-2. `pnpm start`: website hosted at `localhost:3000` and can be accessed in
+1. `bun install`
+2. `bun start`: website hosted at `localhost:5173` and can be accessed in
    your local network
 
 ## Publishing
 
-1. `pnpm install`
-2. `pnpm build`
+1. `bun install`
+2. `bun run build`
 3. `node publish.js`
+
+GitHub Actions also deploys on release via the Release workflow.

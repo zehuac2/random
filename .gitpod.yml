@@ -1,8 +1,0 @@
-
-tasks:
-  - init: pnpm install
-    command: pnpm start
-
-vscode:
-  extensions:
-    - lukashass.volar
