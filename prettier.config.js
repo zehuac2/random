@@ -1,3 +1,8 @@
-module.exports = {
-  singleQuote: true
+/**
+ * @type {import('prettier').Config}
+ */
+const config = {
+  singleQuote: true,
 };
+
+export default config;
