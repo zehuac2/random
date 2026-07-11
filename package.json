@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "repository": "https://github.com/zehuac2/random.git",
-  "author": "Zehua-Chen <***REMOVED***>",
   "license": "MIT",
   "packageManager": "bun@1.3.14",
   "scripts": {
