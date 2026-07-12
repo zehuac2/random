@@ -1,6 +1,4 @@
-# Release
-
-name: Release
+name: Deploy to Github Pages
 
 on:
   push:
