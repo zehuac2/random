@@ -12,6 +12,5 @@ A web app to generate random strings
 
 1. `bun install`
 2. `bun run build`
-3. `node publish.js`
 
-GitHub Actions also deploys on release via the Release workflow.
+GitHub Actions deploys on push to `main` via the Deploy to GitHub Pages workflow.
