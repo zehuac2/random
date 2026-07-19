@@ -1,11 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { App } from './App';
-
-if (typescaleStyles.styleSheet) {
-  document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-}
+import { theme } from './theme';
 
 const root = document.getElementById('app');
 
@@ -15,6 +13,9 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </StrictMode>,
 );
