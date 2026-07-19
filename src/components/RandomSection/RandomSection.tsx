@@ -4,8 +4,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Button } from '../Button';
-import { TextField } from '../TextField';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import type { RandomSectionModel } from '../../services';
 
 export interface RandomSectionProps {
@@ -37,13 +37,19 @@ export function RandomSection({
             <TextField
               label="Name"
               value={value.name}
-              onChange={(name) => update({ name })}
+              fullWidth
+              variant="outlined"
+              onChange={(event) => update({ name: event.target.value })}
             />
             <TextField
               label="Length"
               type="number"
               value={value.length}
-              onChange={(length) => update({ length: Number(length) || 0 })}
+              fullWidth
+              variant="outlined"
+              onChange={(event) =>
+                update({ length: Number(event.target.value) || 0 })
+              }
             />
             <Stack spacing={1}>
               <Typography variant="body1" sx={{ fontWeight: 500 }}>
@@ -74,7 +80,7 @@ export function RandomSection({
             </Stack>
             <Button
               variant="outlined"
-              block
+              fullWidth
               startIcon={<span className="material-icons">delete</span>}
               onClick={(event) => {
                 event.preventDefault();

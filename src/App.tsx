@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import { Button } from './components/Button';
-import { Typography } from './components/Typography';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import RandomSection from './components/RandomSection';
 import { RandomConfiguration, RandomSectionModel } from './services';
 
@@ -82,13 +82,18 @@ export function App() {
       >
         <Container maxWidth="md">
           <Stack spacing={1}>
-            <Typography aria-label="output" variant="headline6">
+            <Typography aria-label="output" variant="h6">
               {output}
             </Typography>
-            <Button block onClick={onGenerate}>
+            <Button variant="contained" fullWidth onClick={onGenerate}>
               Generate
             </Button>
-            <Button color="secondary" block onClick={onAddSection}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={onAddSection}
+            >
               Add Sections
             </Button>
           </Stack>
