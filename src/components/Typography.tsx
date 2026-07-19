@@ -1,12 +1,14 @@
+import MuiTypography from '@mui/material/Typography';
+import type { TypographyProps as MuiTypographyProps } from '@mui/material/Typography';
 import type { ReactNode } from 'react';
 
-const variantClass: Record<string, string> = {
-  headline6: 'md-typescale-title-large',
-  body1: 'md-typescale-body-large',
+const variantMap: Record<string, MuiTypographyProps['variant']> = {
+  headline6: 'h6',
+  body1: 'body1',
 };
 
 export interface TypographyProps {
-  variant?: keyof typeof variantClass | string;
+  variant?: keyof typeof variantMap | string;
   children?: ReactNode;
   className?: string;
   'aria-label'?: string;
@@ -18,12 +20,16 @@ export function Typography({
   className,
   'aria-label': ariaLabel,
 }: TypographyProps) {
-  const typeClass = variantClass[variant] ?? `md-typescale-${variant}`;
-  const classes = [typeClass, className].filter(Boolean).join(' ');
+  const mappedVariant =
+    variantMap[variant] ?? (variant as MuiTypographyProps['variant']);
 
   return (
-    <span className={classes} aria-label={ariaLabel}>
+    <MuiTypography
+      className={className}
+      variant={mappedVariant}
+      aria-label={ariaLabel}
+    >
       {children}
-    </span>
+    </MuiTypography>
   );
 }

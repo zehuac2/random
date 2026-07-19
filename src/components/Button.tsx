@@ -1,19 +1,5 @@
-import { createComponent } from '@lit/react';
-import React from 'react';
-import { MdFilledButton } from '@material/web/button/filled-button.js';
-import { MdOutlinedButton } from '@material/web/button/outlined-button.js';
-
-const FilledButton = createComponent({
-  tagName: 'md-filled-button',
-  elementClass: MdFilledButton,
-  react: React,
-});
-
-const OutlinedButton = createComponent({
-  tagName: 'md-outlined-button',
-  elementClass: MdOutlinedButton,
-  react: React,
-});
+import MuiButton from '@mui/material/Button';
+import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 
 type ButtonVariant = 'filled' | 'outlined';
 type ButtonColor = 'primary' | 'secondary';
@@ -24,8 +10,9 @@ export interface ButtonProps {
   color?: ButtonColor;
   block?: boolean;
   type?: 'button' | 'submit' | 'reset';
-  onClick?: (event: React.MouseEvent) => void;
+  onClick?: MuiButtonProps['onClick'];
   className?: string;
+  startIcon?: React.ReactNode;
 }
 
 export function Button({
@@ -36,28 +23,19 @@ export function Button({
   type = 'button',
   onClick,
   className,
+  startIcon,
 }: ButtonProps) {
-  const style: React.CSSProperties = {
-    width: block ? '100%' : undefined,
-    ...(color === 'secondary' && variant === 'filled'
-      ? {
-          '--md-filled-button-container-color': 'var(--md-sys-color-secondary)',
-          '--md-filled-button-label-text-color':
-            'var(--md-sys-color-on-secondary)',
-        }
-      : {}),
-  };
-
-  const Component = variant === 'outlined' ? OutlinedButton : FilledButton;
-
   return (
-    <Component
+    <MuiButton
       className={className}
-      style={style}
+      variant={variant === 'filled' ? 'contained' : 'outlined'}
+      color={color}
+      fullWidth={block}
       type={type}
       onClick={onClick}
+      startIcon={startIcon}
     >
       {children}
-    </Component>
+    </MuiButton>
   );
 }

@@ -12,8 +12,9 @@
     "build": "vite build --base https://zehuac2.github.io/random/"
   },
   "dependencies": {
-    "@lit/react": "1.0.8",
-    "@material/web": "2.4.1",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "@mui/material": "9.2.0",
     "react": "19.2.7",
     "react-dom": "19.2.7"
   },
@@ -23,7 +24,6 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.3",
     "prettier": "3.9.5",
-    "sass": "1.101.0",
     "typescript": "5.9.3",
     "vite": "8.1.4"
   }

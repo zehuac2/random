@@ -1,15 +1,4 @@
-import { createComponent } from '@lit/react';
-import React from 'react';
-import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
-
-const OutlinedTextField = createComponent({
-  tagName: 'md-outlined-text-field',
-  elementClass: MdOutlinedTextField,
-  react: React,
-  events: {
-    onInput: 'input',
-  },
-});
+import MuiTextField from '@mui/material/TextField';
 
 export interface TextFieldProps {
   label?: string;
@@ -27,16 +16,14 @@ export function TextField({
   onChange,
 }: TextFieldProps) {
   return (
-    <OutlinedTextField
+    <MuiTextField
       className={className}
-      style={{ width: '100%' }}
+      fullWidth
       label={label}
       type={type}
-      value={String(value)}
-      onInput={(event: Event) => {
-        const target = event.target as HTMLInputElement;
-        onChange?.(target.value);
-      }}
+      value={value}
+      variant="outlined"
+      onChange={(event) => onChange?.(event.target.value)}
     />
   );
 }
