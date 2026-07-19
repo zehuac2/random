@@ -11,14 +11,14 @@
 
 ## Commands
 
-| Task | Command |
-|------|---------|
-| Install | `bun install` |
-| Dev server | `bun start` (Vite, default `:5173`) |
+| Task             | Command                                  |
+| ---------------- | ---------------------------------------- |
+| Install          | `bun install`                            |
+| Dev server       | `bun start` (Vite, default `:5173`)      |
 | Production build | `bun run build` (GitHub Pages base path) |
-| Format | `bun run format` |
-| E2E tests | `bun run e2e` |
-| Typecheck | `bunx tsc --noEmit` |
+| Format           | `bun run format`                         |
+| E2E tests        | `bun run e2e`                            |
+| Typecheck        | `bunx check`                             |
 
 ## Project layout
 

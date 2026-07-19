@@ -7,6 +7,7 @@
   "packageManager": "bun@1.3.14",
   "scripts": {
     "start": "vite",
+    "check": "tsc",
     "e2e": "playwright test",
     "format": "prettier --write 'src/**/*.{js,ts,tsx,scss,css}'",
     "build": "vite build --base https://zehuac2.github.io/random/"
@@ -26,7 +27,7 @@
     "@vitejs/plugin-react": "6.0.3",
     "babel-plugin-react-compiler": "1.0.0",
     "prettier": "3.9.5",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "8.1.4"
   }
 }
