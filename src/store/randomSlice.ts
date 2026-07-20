@@ -1,41 +1,18 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { RandomSectionModel } from '../services';
-
-export type SectionState = {
-  id: number;
-  name: string;
-  length: number;
-  useNumbers: boolean;
-  useLetters: boolean;
-};
+import {
+  createSection,
+  generateOutput,
+  type RandomSection,
+} from '../services';
 
 export type RandomState = {
   output: string;
-  sections: SectionState[];
+  sections: RandomSection[];
 };
-
-function toPlain(section: RandomSectionModel): SectionState {
-  return {
-    id: section.id,
-    name: section.name,
-    length: section.length,
-    useNumbers: section.useNumbers,
-    useLetters: section.useLetters,
-  };
-}
-
-function toModel(section: SectionState): RandomSectionModel {
-  const model = new RandomSectionModel(section.id);
-  model.name = section.name;
-  model.length = section.length;
-  model.useNumbers = section.useNumbers;
-  model.useLetters = section.useLetters;
-  return model;
-}
 
 const initialState: RandomState = {
   output: 'Random String',
-  sections: [toPlain(new RandomSectionModel(Date.now()))],
+  sections: [createSection()],
 };
 
 const randomSlice = createSlice({
@@ -43,7 +20,7 @@ const randomSlice = createSlice({
   initialState,
   reducers: {
     addSection(state) {
-      state.sections.push(toPlain(new RandomSectionModel(Date.now())));
+      state.sections.push(createSection());
     },
     deleteSection(state, action: PayloadAction<number>) {
       state.sections = state.sections.filter(
@@ -52,7 +29,7 @@ const randomSlice = createSlice({
     },
     updateSection(
       state,
-      action: PayloadAction<{ index: number; section: SectionState }>,
+      action: PayloadAction<{ index: number; section: RandomSection }>,
     ) {
       const { index, section } = action.payload;
       state.sections[index] = section;
@@ -63,14 +40,11 @@ const randomSlice = createSlice({
         return;
       }
 
-      state.output = state.sections
-        .map((section) => toModel(section).toString())
-        .join('-');
+      state.output = generateOutput(state.sections);
     },
   },
 });
 
 export const { addSection, deleteSection, updateSection, generate } =
   randomSlice.actions;
-export { toModel, toPlain };
 export default randomSlice.reducer;

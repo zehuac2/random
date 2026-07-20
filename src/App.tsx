@@ -9,8 +9,6 @@ import {
   addSection,
   deleteSection,
   generate,
-  toModel,
-  toPlain,
   updateSection,
 } from './store/randomSlice';
 import { useAppDispatch, useAppSelector } from './store';
@@ -34,12 +32,12 @@ export function App() {
           {sections.map((section, index) => (
             <RandomSection
               key={section.id}
-              value={toModel(section)}
+              value={section}
               onChange={(next) =>
                 dispatch(
                   updateSection({
                     index,
-                    section: toPlain(next),
+                    section: next,
                   }),
                 )
               }

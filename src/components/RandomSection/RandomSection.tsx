@@ -6,11 +6,14 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import type { RandomSectionModel } from '../../services';
+import {
+  updateSection,
+  type RandomSection as RandomSectionValue,
+} from '../../services';
 
 export interface RandomSectionProps {
-  value: RandomSectionModel;
-  onChange: (next: RandomSectionModel) => void;
+  value: RandomSectionValue;
+  onChange: (next: RandomSectionValue) => void;
   onDelete: () => void;
 }
 
@@ -19,10 +22,8 @@ export function RandomSection({
   onChange,
   onDelete,
 }: RandomSectionProps) {
-  function update(partial: Partial<RandomSectionModel>) {
-    const next = value.clone();
-    Object.assign(next, partial);
-    onChange(next);
+  function update(partial: Partial<Omit<RandomSectionValue, 'id'>>) {
+    onChange(updateSection(value, partial));
   }
 
   return (
