@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -6,48 +5,20 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import RandomSection from './components/RandomSection';
-import { RandomConfiguration, RandomSectionModel } from './services';
+import {
+  addSection,
+  deleteSection,
+  generate,
+  toModel,
+  toPlain,
+  updateSection,
+} from './store/randomSlice';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function App() {
-  const [output, setOutput] = useState('Random String');
-  const [configuration, setConfiguration] = useState(
-    () => new RandomConfiguration(),
-  );
-
-  function onAddSection() {
-    setConfiguration((prev) => {
-      const next = new RandomConfiguration();
-      next.sections = [...prev.sections, new RandomSectionModel(Date.now())];
-      return next;
-    });
-  }
-
-  function onDelete(deleteIndex: number) {
-    setConfiguration((prev) => {
-      const next = new RandomConfiguration();
-      next.sections = prev.sections.filter((_, index) => index !== deleteIndex);
-      return next;
-    });
-  }
-
-  function onSectionChange(index: number, section: RandomSectionModel) {
-    setConfiguration((prev) => {
-      const next = new RandomConfiguration();
-      next.sections = prev.sections.map((item, i) =>
-        i === index ? section : item,
-      );
-      return next;
-    });
-  }
-
-  function onGenerate() {
-    if (configuration.sections.length === 0) {
-      setOutput('Must have at least one section');
-      return;
-    }
-
-    setOutput(configuration.toString());
-  }
+  const dispatch = useAppDispatch();
+  const output = useAppSelector((state) => state.random.output);
+  const sections = useAppSelector((state) => state.random.sections);
 
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -60,12 +31,19 @@ export function App() {
         }}
       >
         <Stack spacing={2}>
-          {configuration.sections.map((section, index) => (
+          {sections.map((section, index) => (
             <RandomSection
               key={section.id}
-              value={section}
-              onChange={(next) => onSectionChange(index, next)}
-              onDelete={() => onDelete(index)}
+              value={toModel(section)}
+              onChange={(next) =>
+                dispatch(
+                  updateSection({
+                    index,
+                    section: toPlain(next),
+                  }),
+                )
+              }
+              onDelete={() => dispatch(deleteSection(index))}
             />
           ))}
         </Stack>
@@ -85,14 +63,18 @@ export function App() {
             <Typography aria-label="output" variant="h6">
               {output}
             </Typography>
-            <Button variant="contained" fullWidth onClick={onGenerate}>
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={() => dispatch(generate())}
+            >
               Generate
             </Button>
             <Button
               variant="contained"
               color="secondary"
               fullWidth
-              onClick={onAddSection}
+              onClick={() => dispatch(addSection())}
             >
               Add Sections
             </Button>
